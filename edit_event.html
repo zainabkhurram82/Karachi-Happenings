@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-box">
+<h2>Edit Event</h2>
+<form method="POST">
+<label>Title</label><input name="title" value="{{ event.title }}" required>
+<label>Category</label><input name="category" value="{{ event.category }}" required>
+<label>Area</label><input name="area" value="{{ event.area }}" required>
+<label>Date</label><input type="date" name="date" value="{{ event.date }}" required>
+<label>Venue</label><input name="venue" value="{{ event.venue }}" required>
+<label>Price</label><input name="price" value="{{ event.price }}" required>
+<label>Description</label><textarea name="description">{{ event.description }}</textarea>
+<button type="submit">Update Event</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Discover Karachi</h1>
+<p class="subtitle">Music, Food, Tech & Culture — all in one place.</p>
+<div class="grid">
+{% for e in events %}
+<div class="card">
+  <span class="badge">{{ e.category }}</span>
+  <h2>{{ e.title }}</h2>
+  <p>📍 {{ e.venue }}, {{ e.area }}</p>
+  <p>📅 {{ e.date }} | 💰 {{ e.price }}</p>
+  <p>{{ e.description }}</p>
+  {% if session.get('user') %}<a href="/edit/{{ e.id }}" class="btn-small">Edit</a>{% endif %}
+</div>
+{% endfor %}
+</div>
+{% endblock %}
