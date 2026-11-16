@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 
-app = Flask(__name__, template_folder='.',static_folder= '.')
+app = Flask(__name__, template_folder='.', static_folder='.')
 app.secret_key = "karachi123"
 # Simple users storage - no database needed
 users = {"admin": {"name": "Admin", "password": "1234"}}
