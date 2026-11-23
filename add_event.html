@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Event</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav><a href="/" class="logo">📍 Karachi Happening</a><div><a href="/">Back</a></div></nav>
+<div class="form-box">
+    <h2>Add New Event</h2>
+    <form method="POST" action="/add">
+        <input type="text" name="title" placeholder="Event Title" required>
+        <select name="category" required>
+            <option value="Music">Music</option>
+            <option value="Food">Food</option>
+            <option value="Tech">Tech</option>
+            <option value="Art">Art</option>
+            <option value="Sports">Sports</option>
+        </select>
+        <input type="text" name="area" placeholder="Area e.g. Clifton" required>
+        <input type="date" name="date" required>
+        <input type="text" name="venue" placeholder="Venue" required>
+        <input type="text" name="price" placeholder="Price e.g. 500 or Free" required>
+        <textarea name="description" placeholder="Description" rows="3" required></textarea>
+        <button class="btn" type="submit">Add Event</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Karachi Happening</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">📍 Karachi Happening</a>
+    <div>
+        {% if session.get('user') %}
+            <a href="#">Hi, {{ session.get('name') }}</a>
+            <a href="/add">+ Add Event</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    <div class="hero">
+        <h1>What's Happening in Karachi?</h1>
+        <p>Music, Food, Tech - sab kuch ek jagah</p>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="search" placeholder="Search events..." onkeyup="filterEvents()">
+        <select id="areaFilter" onchange="filterEvents()">
+            <option value="">All Areas</option>
+            <option>Clifton</option>
+            <option>Gulshan</option>
+            <option>Burns Road</option>
+        </select>
+    </div>
+
+    <div class="cards" id="cards">
+        {% for e in events %}
+        <div class="card" data-title="{{ e.title|lower }}" data-area="{{ e.area }}">
+            <span class="badge">{{ e.category }}</span>
+            <h3>{{ e.title }}</h3>
+            <p>📍 {{ e.area }} - {{ e.venue }}</p>
+            <p>📅 {{ e.date }} | 💰 {{ e.price }}</p>
+            <p>{{ e.description }}</p>
+            {% if session.get('user') %}
+            <a href="/edit/{{ e.id }}" class="btn btn-outline" style="margin-top:10px; font-size:13px; padding:6px 12px;">Edit</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function filterEvents(){
+    let q = document.getElementById('search').value.toLowerCase();
+    let area = document.getElementById('areaFilter').value;
+    document.querySelectorAll('.card').forEach(card => {
+        let title = card.getAttribute('data-title');
+        let cardArea = card.getAttribute('data-area');
+        let show = title.includes(q) && (area === "" || cardArea === area);
+        card.style.display = show ? "block" : "none";
+    });
+}
+</script>
+</body>
+</html>
